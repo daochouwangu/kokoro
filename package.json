@@ -31,11 +31,9 @@
     "typescript": "5.2.2"
   },
   "manifest": {
-    "host_permissions": [
-      "https://*/*"
-    ],
     "permissions": [
-      "scripting"
+      "scripting",
+      "activeTab"
     ]
   }
 }

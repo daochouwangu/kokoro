@@ -24,24 +24,29 @@ function IndexPopup() {
       return
     }
     setIsLoading(true)
-    const res = await sendToContentScript({
-      name: 'getPageHtml',
-    }).catch(err => console.error(err))
-    console.log(res)
+    const res = await chrome.scripting.executeScript({
+      target: { tabId: currentTab.id },
+      func: () => {
+        const article = document.querySelector('article')
+        if (article) {
+          return article.parentElement.outerHTML
+        }
+        const html = document.documentElement.innerHTML
+        return html
+      }
+    })
+    const html = res[0]?.result
     const parser = new DOMParser();
-    const doc = parser.parseFromString(res, "text/html");
+    const doc = parser.parseFromString(html, "text/html");
     const article = new Readability(doc).parse();
     // 去除文章中的多余空格(连续俩个空格及以上)和换行
-    console.log(article)
     let content = article.textContent.replace(/\n/g, ' ').replace(/(\s{2,})/g, ' ')
     // remove link
     content = content.replace(/(https?:\/\/[^\s]+)/g, '')
     let title = ''
     if (!useAI || !content || content.length < 30) {
-      console.log('no ai')
       title = article.title
     } else {
-      console.log('with ai')
       title = await sendToBackground({
         name: 'summary',
         body: {
@@ -52,7 +57,6 @@ function IndexPopup() {
         title = article.title
       }
     }
-    console.log(title)
     if (title) {
       // get current tab link
       const article = {
