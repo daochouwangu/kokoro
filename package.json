@@ -2,7 +2,7 @@
   "name": "kokoro",
   "displayName": "Kokoro",
   "version": "0.0.1",
-  "description": "Help you create Daily News",
+  "description": "Collect Article And Read it Later",
   "author": "TimLi(daochouwangu@gmail.com)",
   "scripts": {
     "dev": "plasmo dev",

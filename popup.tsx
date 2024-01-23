@@ -10,7 +10,7 @@ interface Article {
 function IndexPopup() {
   const [data, setData] = useStorage<Article[]>("article-data", [])
   const [isLoading, setIsLoading] = useState(false)
-  
+  const [useAI, setUseAI] = useStorage<boolean>("use-ai", false)
   const set = new Set(data.map(item => item.url))
   const clear = () => {
     setData([])
@@ -27,26 +27,32 @@ function IndexPopup() {
     const res = await sendToContentScript({
       name: 'getPageHtml',
     }).catch(err => console.error(err))
+    console.log(res)
     const parser = new DOMParser();
     const doc = parser.parseFromString(res, "text/html");
     const article = new Readability(doc).parse();
     // 去除文章中的多余空格(连续俩个空格及以上)和换行
-
+    console.log(article)
     let content = article.textContent.replace(/\n/g, ' ').replace(/(\s{2,})/g, ' ')
     // remove link
     content = content.replace(/(https?:\/\/[^\s]+)/g, '')
     let title = ''
-    if (!content || content.length < 30) {
+    if (!useAI || !content || content.length < 30) {
+      console.log('no ai')
       title = article.title
     } else {
+      console.log('with ai')
       title = await sendToBackground({
         name: 'summary',
         body: {
           data: content
         },
       })
+      if (!title) {
+        title = article.title
+      }
     }
-     
+    console.log(title)
     if (title) {
       // get current tab link
       const article = {
@@ -56,13 +62,6 @@ function IndexPopup() {
       setData([...data, article])
     }
     setIsLoading(false)
-  }
-  if (isLoading) {
-    return (
-      <div className="flex flex-col p-4 w-96">
-        总结中。。。
-      </div>
-    )
   }
   // copy with markdown
   const copy = () => {
@@ -88,6 +87,12 @@ function IndexPopup() {
                 </div>
               )
             })
+          }
+          {
+            isLoading && <div className="flex flex-row justify-center items-center">
+              <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-gray-900">
+              </div>
+            </div>
           }
         </div>
       <div className="flex flex-row items-center">

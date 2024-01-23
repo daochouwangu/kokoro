@@ -9,7 +9,7 @@ export const getPageHtml = () => {
   useMessage<string, string>(async (req, res) => {
     const article = document.querySelector('article')
     if (article) {
-      res.send(article.outerHTML);
+      res.send(article.parentElement.outerHTML);
       return
     }
     const html = document.documentElement.innerHTML
