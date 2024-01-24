@@ -1,0 +1,46 @@
+{
+  "extensionDescription": {
+    "message": "保存文章，稍后再读，支持导出，支持AI摘要、起标题、判断广告",
+    "description": "Description of the extension."
+  },
+  "settings": {
+    "message": "设置",
+    "description": "Setting."
+  },
+  "button_add": {
+    "message": "添加",
+    "description": "Text of Add Article Button."
+  },
+  "button_add_with_summary": {
+    "message": "总结并添加",
+    "description": "Text of Add Article Button."
+  },
+  "button_export": {
+    "message": "导出",
+    "description": "Text of Add Article Button."
+  },
+  "ai_tip": {
+    "message": "需要先在设置中填写 OpenAI API Key",
+    "description": "Text of Add Article Button."
+  },
+  "label_useai": {
+    "message": "是否启用 AI 能力(自动生成标题，总结，判断是否是广告)",
+    "description": "Text of Add Article Button."
+  },
+  "label_changetitle": {
+    "message": "AI起标题",
+    "description": "Text of Add Article Button."
+  },
+  "article_exist": {
+    "message": "已添加过",
+    "description": "Text of Add Article Button."
+  },
+  "prompt1": {
+    "message": "你是一个负责总结技术博客内容的专家，请根据下面这篇文章返回一个 json 字符串，包含 { title, summary, isAd } 分别表示中文标题，中文总结，和是否可能是广告，标题在20字以内，总结在150字以内，isAd 为 true 或者 false ",
+    "description": "Text of Add Article Button."
+  },
+  "prompt2": {
+    "message": "只返回 json 即可，返回结果：",
+    "description": "Text of Add Article Button."
+  }
+}

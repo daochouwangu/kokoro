@@ -2,7 +2,7 @@
   "name": "kokoro",
   "displayName": "Kokoro",
   "version": "0.0.3",
-  "description": "Collect Article And Read it Later",
+  "description": "__MSG_extensionDescription__",
   "author": "TimLi(daochouwangu@gmail.com)",
   "scripts": {
     "dev": "plasmo dev",
@@ -31,6 +31,7 @@
     "typescript": "5.2.2"
   },
   "manifest": {
+    "default_locale": "en",
     "permissions": [
       "scripting",
       "activeTab"

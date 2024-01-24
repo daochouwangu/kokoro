@@ -14,6 +14,8 @@ const handler: PlasmoMessaging.MessageHandler<
   RequestBody,
   RequestResponse
 > = async (req, res) => {
+  const lang = chrome.i18n.getUILanguage()
+  console.log(lang)
   const { 
     title,
     content,
@@ -23,6 +25,8 @@ const handler: PlasmoMessaging.MessageHandler<
     res.send(false)
     return
   }
+  console.log(chrome)
+  console.log(chrome.i18n.getMessage('prompt1'))
   const apiKey = await storage.get('openai-api-key')
   const baseURL = await storage.get('openai-base-url') || 'https://api.openai.com/v1'
   if (!apiKey) {
@@ -34,9 +38,9 @@ const handler: PlasmoMessaging.MessageHandler<
     const response = await openai.chat.completions.create({
       model: 'gpt-3.5-turbo-1106',
       messages: [
-        { role: 'system', content: '你是一个负责总结技术博客内容的专家，请根据下面这篇文章返回一个json字符串，包含 { title, summary, isAd } 分别表示标题，总结，和是否可能是广告，标题在20字以内，总结在150字以内，isAd为 true 或者 false ' },
+        { role: 'system', content: chrome.i18n.getMessage('prompt1')},
         { role: 'user', content },
-        { role: 'system', content: '只返回json即可，返回结果：' },
+        { role: 'system', content: chrome.i18n.getMessage('prompt2') },
       ],
       response_format: {"type": "json_object"}
     })

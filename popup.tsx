@@ -24,7 +24,7 @@ function IndexPopup() {
     const currentTab = tab[0];
     const url = currentTab.url;
     if (set.has(url)) {
-      alert('已经添加过了')
+      alert(chrome.i18n.getMessage("article_exist"))
       setIsLoading(false)
       return
     }
@@ -109,7 +109,7 @@ function IndexPopup() {
   const copy = () => {
     const text = data.map(item => `- [${item.title}](${item.url})`).join('\n')
     navigator.clipboard.writeText(text).then(() => {
-      alert('复制成功')
+      alert('Copyed')
     })
   }
   const deleteItem = (index: number) => {
@@ -137,11 +137,15 @@ function IndexPopup() {
             </label>
             {
               useAI && !apikey && (
-                <div className="text-red-500 text-sm underline cursor-pointer" onClick={() => toOption()}>请先设置 OpenAI 秘钥</div>
+                <div className="text-red-500 text-sm underline cursor-pointer" onClick={() => toOption()}>
+                  {chrome.i18n.getMessage("ai_tip")}
+                </div>
               )
             }
           </div>
-          <div className="text-blue-500 text-sm underline cursor-pointer" onClick={() => toOption()}>设置</div>
+          <div className="text-blue-500 text-sm underline cursor-pointer" onClick={() => toOption()}>
+            {chrome.i18n.getMessage("settings")}
+          </div>
         </div>
         <div className="flex flex-col p-2 gap-1 mt-1">
           {
@@ -175,10 +179,16 @@ function IndexPopup() {
         </div>
       <div className="flex flex-row items-center p-2">
         {
-          useAI ? <button className="border rounded text-lg bg-yellow-400 text-white w-64" onClick={addWithAi}>总结并添加</button>
-          :<button className="border rounded text-lg bg-purple-500 text-white w-64" onClick={addWithOutAi}>添加</button>
+          useAI ? <button className="border rounded text-lg bg-yellow-400 text-white w-64" onClick={addWithAi}>
+            {chrome.i18n.getMessage("button_add_with_summary")}
+          </button>
+          :<button className="border rounded text-lg bg-purple-500 text-white w-64" onClick={addWithOutAi}>
+            {chrome.i18n.getMessage("button_add")}
+          </button>
         }
-        <button className="border rounded text-lg bg-blue-400 text-white w-64" onClick={copy}>复制</button>
+        <button className="border rounded text-lg bg-blue-400 text-white w-64" onClick={copy}>
+          {chrome.i18n.getMessage("button_export")}
+        </button>
       </div>
     </div>
   )

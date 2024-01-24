@@ -1,0 +1,46 @@
+{
+  "extensionDescription": {
+    "message": "Collect Article And Read it Later",
+    "description": "Description of the extension."
+  },
+  "settings": {
+    "message": "Settings",
+    "description": "Setting."
+  },
+  "button_add": {
+    "message": "Add",
+    "description": "Text of Add Article Button."
+  },
+  "button_add_with_summary": {
+    "message": "Summary & Add",
+    "description": "Text of Add Article Button."
+  },
+  "button_export": {
+    "message": "Export",
+    "description": "Text of Add Article Button."
+  },
+  "ai_tip": {
+    "message": "You need fill OpenAI API key in settings.",
+    "description": "Text of Add Article Button."
+  },
+  "label_useai": {
+    "message": "Use AI(Auto Generate Title, Summary, Judge Ad)",
+    "description": "Text of Add Article Button."
+  },
+  "label_changetitle": {
+    "message": "Change Title Automatically",
+    "description": "Text of Add Article Button."
+  },
+  "article_exist": {
+    "message": "You already added this article.",
+    "description": "Text of Add Article Button."
+  },
+  "prompt1": {
+    "message": "Assume you're an expert tasked with summarizing technical blog content. Given the following article, return a JSON string containing the fields { title, summary, isAd }. These fields represent the title, summary, and a boolean indicating whether the content is likely an advertisement. The title should be within 20 characters, the summary within 150 characters, and isAd should be either true or false.",
+    "description": "Text of Add Article Button."
+  },
+  "prompt2": {
+    "message": "only return json, Result: ",
+    "description": "Text of Add Article Button."
+  }
+}
