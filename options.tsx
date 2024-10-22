@@ -4,9 +4,9 @@ import "./style.css"
 
 const AI_PLATFORMS = [
   { id: "openai", name: "OpenAI" },
-  { id: "01ai", name: "01万物" },
-  { id: "kimi", name: "Kimi" },
-  { id: "bytedance", name: "字节" }
+  { id: "01ai", name: "01万物" }
+  // { id: "kimi", name: "Kimi" },
+  // { id: "bytedance", name: "字节" }
 ]
 
 function IndexOptions() {
