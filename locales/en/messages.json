@@ -36,7 +36,7 @@
     "description": "Text of Add Article Button."
   },
   "prompt1": {
-    "message": "Assume you're an expert tasked with summarizing technical blog content. Given the following article, return a JSON string containing the fields { title, summary, isAd }. These fields represent the title, summary, and a boolean indicating whether the content is likely an advertisement. The title should be within 20 characters, the summary within 150 characters, and isAd should be either true or false.",
+    "message": "Assume you're an expert tasked with summarizing technical blog content. Given the following article, return a JSON string containing the fields { title, summary, isAd }. These fields represent the title, summary, and a boolean indicating whether the content is likely an advertisement. The title should be within 20 words, the summary within 80 words, and isAd should be either true or false.",
     "description": "Text of Add Article Button."
   },
   "prompt2": {

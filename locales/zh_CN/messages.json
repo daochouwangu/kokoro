@@ -36,7 +36,7 @@
     "description": "Text of Add Article Button."
   },
   "prompt1": {
-    "message": "你是一个负责总结技术博客内容的专家，请根据下面这篇文章返回一个 json 字符串，包含 { title, summary, isAd } 分别表示中文标题，中文总结，和是否可能是广告，标题在20字以内，总结在150字以内，isAd 为 true 或者 false ",
+    "message": "你是一个负责总结技术博客内容的专家，请根据下面这篇文章返回一个 json 字符串，包含 { title, summary, isAd } 分别表示中文标题，中文总结，和是否可能是广告，标题在20字以内，总结在80字以内，isAd 为 true 或者 false ",
     "description": "Text of Add Article Button."
   },
   "prompt2": {

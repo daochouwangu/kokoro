@@ -17,7 +17,8 @@ function IndexPopup() {
   const [isLoading, setIsLoading] = useState(false)
   const [showSummary, setShowSummary] = useState(-1)
   const [useAI, setUseAI] = useStorage<boolean>("use-ai", false)
-  const [apikey] = useStorage<string>("openai-api-key")
+  const [selectedPlatform] = useStorage<string>("ai-platform", "openai")
+  const [apiKeys] = useStorage<Record<string, string>>("ai-api-keys", {})
   const set = new Set(data.map((item) => item.url))
   const clear = () => {
     setData([])
@@ -74,6 +75,12 @@ function IndexPopup() {
     if (!useAI || !content || content.length < 30) {
       title = article.title
     } else {
+      const apiKey = apiKeys[selectedPlatform]
+      if (!apiKey) {
+        alert(chrome.i18n.getMessage("ai_key_missing"))
+        setIsLoading(false)
+        return
+      }
       const result = await sendToBackground({
         name: "summary",
         body: {
@@ -88,7 +95,6 @@ function IndexPopup() {
       }
     }
     if (title) {
-      // get current tab link
       const article = {
         title,
         url
@@ -133,9 +139,11 @@ function IndexPopup() {
   }
   // copy with markdown
   const copy = () => {
-    const text = data.map((item) => `- [${item.title}](${item.url})`).join("\n")
+    const text = data
+      .map((item) => `**[${item.title}](${item.url})** - ${item.summary || ""}`)
+      .join("\n")
     navigator.clipboard.writeText(text).then(() => {
-      alert("Copyed")
+      alert("已复制")
     })
   }
   const deleteItem = (index: number) => {
@@ -160,7 +168,7 @@ function IndexPopup() {
           <label htmlFor="offers" className="text-xl text-gray-900">
             AI
           </label>
-          {useAI && !apikey && (
+          {useAI && !apiKeys[selectedPlatform] && (
             <div
               className="text-red-500 text-sm underline cursor-pointer"
               onClick={() => toOption()}>
